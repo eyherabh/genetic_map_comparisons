@@ -11,9 +11,9 @@ Phasing and imputation require the use of genetic recombination maps, typically 
 
 ## Position ranges and sampling density
 
-The initial positions coincide for most genetic maps except for chromosomes 4, 7, 11, 13 and 16 in both b37 and b38, and for chromosome 22 in b38. In all cases, the maps of SHAPEIT4 start earlier than those of EAGLE2. The last positions never differ (see [stats/b37.ranges.txt] and [stats/b38.ranges.txt]). 
+The initial positions coincide for most genetic maps except for chromosomes 4, 7, 11, 13 and 16 in both b37 and b38, and for chromosome 22 in b38. In all cases, the maps of SHAPEIT4 start earlier than those of EAGLE2. The last positions never differ (see [stats/b37.ranges.txt](stats/b37.ranges.txt) and [stats/b38.ranges.txt](stats/b38.ranges.txt)). 
 
-The number of samples is larger in the maps of SHAPEIT 4 for all chromosomes except for chromosome X_par1 and X (see [stats/b37.rows.txt] and [stats/b38.rows.txt]).
+The number of samples is larger in the maps of SHAPEIT 4 for all chromosomes except for chromosome X_par1 and X (see [stats/b37.rows.txt](stats/b37.rows.txt) and [stats/b38.rows.txt](stats/b38.rows.txt)).
 
 
 
