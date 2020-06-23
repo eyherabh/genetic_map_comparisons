@@ -157,7 +157,7 @@ compare_map <- function(chr) {
               axis.line = element_line(),
               legend.position = c(0.1, 0.9))
     
-    ggsave(paste0(figpath, "/chr", chr, ".", build, ".genetic_map_shaprit4_vs_eagle2.png"))
+    ggsave(paste0(figpath, "/chr", chr, ".", build, ".genetic_map_shapeit4_vs_eagle2.png"))
 
     ## Preparing data with difference between genetic maps.
     mapdiff <- dcast(mapse, pos ~ map, value.var="cM")[, diff:=SHAPEIT4-EAGLE2][, c("SHAPEIT4", "EAGLE2"):=NULL]
@@ -176,7 +176,7 @@ compare_map <- function(chr) {
               plot.margin = margin(1,1,1,1, "cm"),
               axis.line = element_line())
 
-    ggsave(paste0(figpath, "/chr", chr, ".", build, ".genetic_map_difference_shaprit4_vs_eagle2.png"), width=16, height=8, units="cm")
+    ggsave(paste0(figpath, "/chr", chr, ".", build, ".genetic_map_difference_shapeit4_vs_eagle2.png"), width=16, height=8, units="cm")
 
     return(mapdiff)
 }
@@ -199,4 +199,4 @@ ggplot(data = tabdiffs, aes(x=chr, y=diff, color=chr)) +
           axis.line = element_line(),
           legend.position = "none")
 
-ggsave(paste0(figpath, "/All.", build, ".genetic_map_difference_shaprit4_vs_eagle2.png"))
+ggsave(paste0(figpath, "/All.", build, ".genetic_map_difference_shapeit4_vs_eagle2.png"))
