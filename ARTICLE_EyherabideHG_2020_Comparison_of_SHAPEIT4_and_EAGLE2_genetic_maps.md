@@ -45,6 +45,14 @@ I computed the difference between the resampled genetic distances in the SHAPEIT
 ![Genetic-distance difference for build b37](figures/All.b37.genetic_map_difference_shaprit4_vs_eagle2.png "Genetic-distance difference for build b37")
 
 
+As it can be seen, the SHAPEIT4 maps have typically smaller genetic distances than the EAGLE2 maps, although for some chromosomes they are predominantly larger (e.g. 14 and 16) or virtually the same (e.g. X). To gain more insight, the following two figures show the genetic distances for chromosome 9
+
+![Genetic-distance comparison for chromosome 9 in build b37](figures/chr9.b37.genetic_map_shaprit4_vs_eagle2.png "Genetic-distance comparison for chromosome 9 in build b37")
+
+and their difference
+
+![Genetic-distance difference for chromosome 9 in build b37](figures/chr9.b37.genetic_map_difference_shaprit4_vs_eagle2.png "Genetic-distance difference for chromosome 9 in build b37")
+
 
 
 
