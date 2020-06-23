@@ -120,31 +120,34 @@ compare_map <- function(chr) {
     ## Using hyman interpolation because the curves are monotonically increasing.
     len <- 100001
     ## Workaround to simplify code and avoid issues when the beginning does not coincide.
-    if(!chr %in% c("X", "X_par2")) { 
-        mapsi <- as.data.table(spline(c(0, maps$pos), c(0, maps$cM), n=len, method="hyman"))
-        mapei <- as.data.table(spline(c(0, mape$pos), c(0, mape$cM), n=len, method="hyman"))
-    } else {
+    if(chr %in% c("X", "X_par2")) {
         ## Not using the work around for Non-PAR and PAR2 region. I
         ## could have set their initial position with 0cM, but that's
         ## unnecessary by their construction.
         mapsi <- as.data.table(spline(maps$pos, maps$cM, n=len, method="hyman"))
         mapei <- as.data.table(spline(mape$pos, mape$cM, n=len, method="hyman"))
+    } else { 
+        mapsi <- as.data.table(spline(c(0, maps$pos), c(0, maps$cM), n=len, method="hyman"))
+        mapei <- as.data.table(spline(c(0, mape$pos), c(0, mape$cM), n=len, method="hyman"))
     }
     
-
+    mapss <- copy(maps)[, pos:=pos/1E6]
+    mapes <- copy(mape)[, pos:=pos/1E6]
     ## Preparing data table for plotting genetic maps, subsampling and scaling positions to Mbp.
-    mapse <- mapsi[seq(1, len, 10)][, x:=x/1E6][, setnames(.SD, c("pos", "SHAPEIT4"))]
-    mapse[, EAGLE2:=mapei[seq(1, len, 10), y]]
-    mapse <- melt(mapse, id.vars="pos", measure.vars=c("SHAPEIT4", "EAGLE2"), variable.name="map", value.name="cM")
-
-
+    mapse <- mapsi[seq(1, len, 10)][, x:=x/1E6][, setnames(.SD, c("pos", "SHAPEIT4spl"))]
+    mapse[, EAGLE2spl:=mapei[seq(1, len, 10), y]]
+    mapse <- melt(mapse, id.vars="pos", measure.vars=c("SHAPEIT4spl", "EAGLE2spl"), variable.name="map", value.name="cM")
+    
+    
     ## Computing nice limits and intervals for shortening tick labels.
     xlim <- get_nice_lims(min(mapse$pos), max(mapse$pos))
     ylim <- get_nice_lims(min(mapse$cM), max(mapse$cM))
 
-    ggplot(data = mapse, aes(x=pos, y=cM)) +
-        geom_line(aes(color=map)) +
-        scale_colour_manual(values=c("red", "blue")) +
+    ggplot() +
+        geom_point(data = mapss, aes(x=pos, y=cM, color="SHAPEIT4")) +
+        geom_point(data = mapes, aes(x=pos, y=cM, color="EAGLE2")) +
+        geom_line(data = mapse, aes(x=pos, y=cM, color=map)) +
+        scale_colour_manual(breaks=c("SHAPEIT4", "EAGLE2"), values=c("SHAPEIT4"="orangered", "EAGLE2"="cadetblue", "SHAPEIT4spl"="red3", "EAGLE2spl"="blue3")) +
         ggtitle(paste0("Comparison of genetic maps for chromosome ", chr, "\ndistributed with SHAPEIT4 and EAGLE2 for build ", build)) +
         xlab("Position (Mbp)") +
         ylab("Genetic distance (cM)") +
@@ -160,13 +163,13 @@ compare_map <- function(chr) {
     ggsave(paste0(figpath, "/chr", chr, ".", build, ".genetic_map_shapeit4_vs_eagle2.png"))
 
     ## Preparing data with difference between genetic maps.
-    mapdiff <- dcast(mapse, pos ~ map, value.var="cM")[, diff:=SHAPEIT4-EAGLE2][, c("SHAPEIT4", "EAGLE2"):=NULL]
+    mapdiff <- dcast(mapse, pos ~ map, value.var="cM")[, diff:=SHAPEIT4spl-EAGLE2spl][, c("SHAPEIT4spl", "EAGLE2spl"):=NULL]
     
     ylim <- get_nice_lims(min(mapdiff$diff), max(mapdiff$diff))
     
-    ggplot(data = mapdiff, aes(x=pos, y=diff, color="green")) +
-        geom_line() +
-        ggtitle(paste0("Difference for chromosome ", chr, "\nof the genetic distances distributed with SHAPEIT4 and EAGLE2 for build ", build)) +
+    ggplot(data = mapdiff, aes(x=pos, y=diff)) +
+        geom_line(colour="green4") +
+        ggtitle(paste0("Difference for chromosome ", chr, "of the genetic distances\ndistributed with SHAPEIT4 and EAGLE2 for build ", build)) +
         xlab("Position (Mbp)") +
         ylab("Genetic distance difference\nSHAPEIT4 - EAGLE2 (cM)") +
         scale_x_continuous(limits=xlim[1:2], breaks=seq(xlim[1], xlim[2], xlim[3]), expand=c(0,0)) +
@@ -174,7 +177,8 @@ compare_map <- function(chr) {
         theme(plot.title = element_text(hjust = 0.5),
               panel.background = element_blank(),
               plot.margin = margin(1,1,1,1, "cm"),
-              axis.line = element_line())
+              axis.line = element_line(),
+              legend.position = "none")
 
     ggsave(paste0(figpath, "/chr", chr, ".", build, ".genetic_map_difference_shapeit4_vs_eagle2.png"), width=16, height=8, units="cm")
 

@@ -1,4 +1,4 @@
-# Comparison of the genetic maps distributed with SHAPEIT4 and EAGLE2
+# On the genetic maps distributed with SHAPEIT4 and EAGLE2
 
 Ph.D. Hugo Gabriel Eyherabide
 
@@ -8,10 +8,6 @@ Ph.D. Hugo Gabriel Eyherabide
 
 Phasing and imputation tools require the use of genetic recombination maps that they oftentimes distribute in their bundle. However, sometimes the distributed maps cannot be unpacked, let alone used. This was the case in [this question](https://www.jiscmail.ac.uk/cgi-bin/wa-jisc.exe?A2=ind2006&L=OXSTATGEN&O=D&P=6811) posted in OXSTATGEN mailing-list for the maps linked to [SHAPEIT4](https://github.com/odelaneau/shapeit4) and [IMPUTE5](https://jmarchini.org/impute5/). The question then arises as to whether these maps can be used interchangably without compatibility and results-comparability issues. Turns out that, as I show below, those maps differ not only in format but also quantitatively from the ones linked to [SHAPEIT2](https://mathgen.stats.ox.ac.uk/genetics_software/shapeit/shapeit.html), [IMPUTE2](https://mathgen.stats.ox.ac.uk/impute/impute_v2.html) and [EAGLE2](https://data.broadinstitute.org/alkesgroup/Eagle/https://data.broadinstitute.org/alkesgroup/Eagle/). This article explores these differences to shed light on potential compatibility and comparability issues.
 
-
-## UNDER CONSTRUCTION
-
-This work is still under construction, but even if not exhaustive and perfectly formatted, the presented results are most likely useful in their present state.
 
 ## Format
 
