@@ -9,6 +9,10 @@ Ph.D. Hugo Gabriel Eyherabide
 Phasing and imputation tools require the use of genetic recombination maps that they oftentimes distribute in their bundle. However, sometimes the distributed maps cannot be unpacked, let alone used. This was the case in [this question](https://www.jiscmail.ac.uk/cgi-bin/wa-jisc.exe?A2=ind2006&L=OXSTATGEN&O=D&P=6811) posted in OXSTATGEN mailing-list for the maps linked to [SHAPEIT4](https://github.com/odelaneau/shapeit4) and [IMPUTE5](https://jmarchini.org/impute5/). The question then arises as to whether these maps can be used interchangably without compatibility and results-comparability issues. Turns out that, as I show below, those maps differ not only in format but also quantitatively from the ones linked to [SHAPEIT2](https://mathgen.stats.ox.ac.uk/genetics_software/shapeit/shapeit.html), [IMPUTE2](https://mathgen.stats.ox.ac.uk/impute/impute_v2.html) and [EAGLE2](https://data.broadinstitute.org/alkesgroup/Eagle/https://data.broadinstitute.org/alkesgroup/Eagle/). This article explores these differences to shed light on potential compatibility and comparability issues.
 
 
+## UNDER CONSTRUCTION
+
+This work is still under construction, but even if not exhaustive and perfectly formatted, the presented results are most likely useful in their present state.
+
 ## Format
 
 The maps distributed with EAGLE2 and SHAPEIT4 have four (4) and three (3) columns, respectively. Specifically, the `COMBINED_rate(cM/Mb)` is present in the EAGLE2 maps (third column) but absent in the SHAPEIT4 maps. In addition, the columns in the EAGLE2 maps are separated by spaces, whereas in the SHAPEIT3 maps, by tabulators. Further, like in VCF files, the maps in EAGLE2 have the chromosome ID and base-pair positions in the first and second columns, whereas the maps in SHAPEIT4 have the locations inverted, namely the chomosome is in the second columns and the base-pair position in the first. Finally, the names of the columns differ.
@@ -54,9 +58,10 @@ and their difference
 ![Genetic-distance difference for chromosome 9 in build b37](figures/chr9.b37.genetic_map_difference_shapeit4_vs_eagle2.png "Genetic-distance difference for chromosome 9 in build b37")
 
 
-
+Analogous results are obtained for build b38, as shown below
 
 ![Genetic-distance difference for build b38](figures/All.b38.genetic_map_difference_shapeit4_vs_eagle2.png "Genetic-distance difference for build b38")
+
 
 
 <!-- # References -->
